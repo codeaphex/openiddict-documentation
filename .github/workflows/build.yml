@@ -32,6 +32,9 @@ jobs:
       with:
         args: install docfx
 
+    - name: Execute command
+      run: ls -la
+
     - name: Install dependencies
       run: dotnet restore ./src/OpenIddict/OpenIddict.csproj
 
