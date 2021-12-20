@@ -22,10 +22,23 @@ jobs:
         repository: openiddict/openiddict-core
         path: submodules/openiddict-core
 
-    - name: Build documentation
-      uses: nikeee/docfx-action@master
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        args: docfx.json
+        dotnet-version: 6.0
+
+    - name: Setup DocFX
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install docfx
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: DocFX Build
+      working-directory: _site
+      run: docfx docfx.json
+      continue-on-error: false
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.7
