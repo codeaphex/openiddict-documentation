@@ -33,7 +33,7 @@ jobs:
         args: install docfx
 
     - name: Install dependencies
-      run: dotnet restore /src/OpenIddict/OpenIddict.csproj
+      run: dotnet restore ./src/OpenIddict/OpenIddict.csproj
 
     - name: DocFX Build
 #      working-directory: _site
