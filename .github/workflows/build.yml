@@ -32,11 +32,11 @@ jobs:
       with:
         args: install docfx
 
-#    - name: Install dependencies
-#      run: dotnet restore
+    - name: Install dependencies
+      run: dotnet restore /src/OpenIddict/OpenIddict.csproj
 
     - name: DocFX Build
-      working-directory: _site
+#      working-directory: _site
       run: docfx docfx.json
       continue-on-error: false
 
