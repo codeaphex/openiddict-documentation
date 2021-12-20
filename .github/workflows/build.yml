@@ -43,7 +43,7 @@ jobs:
 
     - name: DocFX Build
 #      working-directory: _site
-      run: ./docfx.console.2.58.9/tools/docfx docfx.json
+      run: ./docfx.console.2.58.9/tools/docfx.exe docfx.json
       continue-on-error: false
 
     - name: Deploy 🚀
