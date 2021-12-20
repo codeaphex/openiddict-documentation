@@ -30,8 +30,8 @@ jobs:
     - name: Install DocFX
       run: nuget install docfx.console
          
-    - name: List dir
-      run: ls -la -R
+#    - name: List dir
+#      run: ls -la -R
 
  #   - name: Setup DocFX
  #     uses: crazy-max/ghaction-chocolatey@v1
@@ -43,7 +43,7 @@ jobs:
 
     - name: DocFX Build
 #      working-directory: _site
-      run: docfx.console/tools/docfx docfx.json
+      run: ./docfx.console.2.58.9/tools/docfx docfx.json
       continue-on-error: false
 
     - name: Deploy 🚀
