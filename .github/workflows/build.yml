@@ -32,8 +32,11 @@ jobs:
       with:
         args: install docfx
 
+    - name: Execute command
+      run: ls -la ./submodules/openiddict-core
+
     - name: Install dependencies
-      run: dotnet restore ./submodules/openiddict-core/OpenIddict/OpenIddict.csproj
+      run: dotnet restore submodules/openiddict-core/OpenIddict/OpenIddict.csproj
 
     - name: DocFX Build
 #      working-directory: _site
