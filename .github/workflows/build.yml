@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: ubuntu-latest
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -19,21 +19,46 @@ jobs:
     - name: Checkout submodule
       uses: actions/checkout@v2
       with:
-        repository: openiddict/openiddict-core
+        repository: codeaphex/openiddict-core
         path: submodules/openiddict-core
 
-    - name: Build documentation
-      uses: nikeee/docfx-action@master
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        args: docfx.json
+        dotnet-version: 6.x.x
 
-    - name: Deploy to GitHub Pages
-      if: ${{ github.repository_owner == 'openiddict' && (github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/heads/rel/') || startsWith(github.ref, 'refs/tags/')) }}
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+    - name: Install DocFX
+      run: nuget install docfx.console
+         
+#    - name: List dir
+#      run: ls -la -R
+
+ #   - name: Setup DocFX
+ #     uses: crazy-max/ghaction-chocolatey@v1
+ #     with:
+ #       args: install docfx
+
+    - name: Install dependencies
+      run: dotnet restore submodules/openiddict-core/src/OpenIddict/OpenIddict.csproj
+
+    - name: DocFX Build
+#      working-directory: _site
+      run: ./docfx.console.2.58.9/tools/docfx.exe docfx.json
+      continue-on-error: false
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: _site
-        GIT_CONFIG_NAME: OpenIddict Bot
-        GIT_CONFIG_EMAIL: 32257313+openiddict-bot@users.noreply.github.com
-        COMMIT_MESSAGE: Update the documentation pages
+        branch: gh-pages # The branch the action should deploy to.
+        folder: _site # The folder the action should deploy.
+
+#    - name: Deploy to GitHub Pages
+#      if: ${{ github.repository_owner == 'codeaphex' && (github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/heads/rel/') || startsWith(github.ref, 'refs/tags/')) }}
+#      uses: JamesIves/github-pages-deploy-action@releases/v3
+#      with:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        BRANCH: gh-pages
+#        FOLDER: _site
+#        GIT_CONFIG_NAME: OpenIddict Bot
+#        GIT_CONFIG_EMAIL: 32257313+openiddict-bot@users.noreply.github.com
+#        COMMIT_MESSAGE: Update the documentation pages

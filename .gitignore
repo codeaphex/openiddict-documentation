@@ -6,3 +6,6 @@
 /**/bin/
 /**/obj/
 _site
+/.vs/openiddict-documentation/v17/.suo
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite

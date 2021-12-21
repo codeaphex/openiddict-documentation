@@ -1,3 +1,5 @@
 [submodule "submodules/openiddict-core"]
 	path = submodules/openiddict-core
-	url = https://github.com/openiddict/openiddict-core
+	url = https://github.com/codeaphex/openiddict-core
+	branch = dev
+

@@ -1,4 +1,22 @@
 {
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "submodules/openiddict-core",
+          "files": [
+            "src/**/*.cs"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "_site/**"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
   "build": {
     "content": [
       {
