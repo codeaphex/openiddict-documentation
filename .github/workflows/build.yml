@@ -19,7 +19,7 @@ jobs:
     - name: Checkout submodule
       uses: actions/checkout@v2
       with:
-        repository: openiddict/openiddict-core
+        repository: codeaphex/openiddict-core
         path: submodules/openiddict-core
 
     - name: Setup .NET Core
